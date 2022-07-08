@@ -49,7 +49,7 @@ if mode.startswith("scale-integer"):
 fname = os.path.basename(os.path.splitext(sys.argv[1])[0])
 print("#define IMAGE_{}_WIDTH {}".format(fname, i.shape[1]))
 print("#define IMAGE_{}_HEIGHT {}".format(fname, i.shape[0]))
-flat = i.flatten().tolist()
+flat = i[:, :, ::-1].flatten().tolist()
 print("const uint8_t IMAGE_{}[] = {{\n    ".format(fname), end="")
 print(",\n    ".join(",".join(str(k>>5) for k in flat[3*x:3*(x+i.shape[1])]) for x in range(0, i.shape[1]*i.shape[0], i.shape[1])))
 print("\n};")
